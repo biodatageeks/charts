@@ -73,6 +73,7 @@ package:
       && chmod g+rwx /config
   script:
     - envsubst < $CHART_NAME/Chart-template.yaml > $CHART_NAME/Chart.yaml
+    - helm dep update $CHART_NAME
     - helm lint $CHART_NAME
     - helm package $CHART_NAME --destination .deploy
   artifacts:
@@ -88,12 +89,16 @@ release:
   before_script:
     - source $VERSION_FILE
     - apk --no-cache add curl git bash
+    - git config --global user.email "team@biodatageeks.org"
+    - git config --global user.name "Biodatageek"
   script:
     - cr upload
+    - git pull origin gh-pages
     - git checkout gh-pages
-    - cr index -i ./index.yaml -p .deploy
-  artifacts:
-    paths:
-      - /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/.index.yaml
+    - cr index -i ./index.yaml -p .deploy --charts-repo https://github.com/${CR_OWNER}/${CR_GIT_REPO}/
+    - git add index.yaml
+    - git add --force .deploy
+    - git commit -m "Release $CHART_NAME-$VERSION"
+    - git push https://${CR_TOKEN}@github.com/${CR_OWNER}/${CR_GIT_REPO}.git
   except: [ master ]
   tags: [ docker ]

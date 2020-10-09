@@ -1,2 +1,5 @@
 .deploy
 .idea
+pysequila/Chart.yaml
+pysequila/charts
+pysequila/Chart.lock
