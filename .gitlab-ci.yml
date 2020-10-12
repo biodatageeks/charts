@@ -80,6 +80,7 @@ version-tag:
       && chmod g+rwx /config
   script:
     - envsubst < $CHART_NAME/Chart-template.yaml > $CHART_NAME/Chart.yaml
+    - envsubst '$PYSEQUILA_VERSION' < $CHART_NAME/values-template.yaml > $CHART_NAME/values.yaml
     - helm dep update $CHART_NAME
     - helm lint $CHART_NAME
     - helm package $CHART_NAME --destination $CR_PACKAGE_PATH
