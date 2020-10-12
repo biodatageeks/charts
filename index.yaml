@@ -3,14 +3,14 @@ entries:
   pysequila:
   - apiVersion: v2
     appVersion: 0.1.6
-    created: "2020-10-12T20:05:11.975616421Z"
+    created: "2020-10-12T20:17:08.534515077Z"
     dependencies:
     - alias: jupyterhub
       name: jupyterhub
       repository: https://jupyterhub.github.io/helm-chart/
       version: 0.9.1
     description: pysequila is an SQL-based solution for large-scale genomic analysis
-    digest: 63285ba889bc4c94cbb7ab3eb9d2c14fd548f0592f7d7991308076212375f074
+    digest: 382d46b41cb40ab4b048933a5716e40ca3c7a7c46f20aa9226b445e8ee1183fb
     home: https://pypi.org/project/pysequila/
     icon: https://avatars2.githubusercontent.com/u/71327120?s=200&v=4
     keywords:
@@ -25,18 +25,18 @@ entries:
     name: pysequila
     type: application
     urls:
-    - https://github.com/biodatageeks/charts-snapshots/releases/download/pysequila-0.1.3-g89ec42b/pysequila-0.1.3-g89ec42b.tgz
-    version: 0.1.3-g89ec42b
+    - https://github.com/biodatageeks/charts/releases/download/pysequila-0.1.3/pysequila-0.1.3.tgz
+    version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.6
-    created: "2020-10-12T20:05:11.773869826Z"
+    created: "2020-10-12T20:17:08.33583857Z"
     dependencies:
     - alias: jupyterhub
       name: jupyterhub
       repository: https://jupyterhub.github.io/helm-chart/
       version: 0.9.1
     description: pysequila is an SQL-based solution for large-scale genomic analysis
-    digest: 9c0513a0248b9d2e80fd0f377b9daf63ba9d1c7f1862600736d80799b37837d5
+    digest: 22f7c70a41ebe88d942641675a092baa4a7ee98f1a89d71a31f670da29c55569
     home: https://pypi.org/project/pysequila/
     icon: https://avatars2.githubusercontent.com/u/71327120?s=200&v=4
     keywords:
@@ -51,18 +51,18 @@ entries:
     name: pysequila
     type: application
     urls:
-    - https://github.com/biodatageeks/charts-snapshots/releases/download/pysequila-0.1.3-g7f320c2/pysequila-0.1.3-g7f320c2.tgz
-    version: 0.1.3-g7f320c2
+    - https://github.com/biodatageeks/charts/releases/download/pysequila-0.1.2/pysequila-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.6
-    created: "2020-10-12T20:05:11.557657306Z"
+    created: "2020-10-12T20:17:08.138493303Z"
     dependencies:
     - alias: jupyterhub
       name: jupyterhub
       repository: https://jupyterhub.github.io/helm-chart/
       version: 0.9.1
     description: pysequila is an SQL-based solution for large-scale genomic analysis
-    digest: 56363e26657d11cbfe98d733f8d725b8059d3f5a8989efde335513d643c27a8d
+    digest: 9caa45ea8e573f55519c869b2f7979384f944fa557d0c4db6d8e9255250abe10
     home: https://pypi.org/project/pysequila/
     icon: https://avatars2.githubusercontent.com/u/71327120?s=200&v=4
     keywords:
@@ -77,32 +77,6 @@ entries:
     name: pysequila
     type: application
     urls:
-    - https://github.com/biodatageeks/charts-snapshots/releases/download/pysequila-0.1.2-gb00ff7a/pysequila-0.1.2-gb00ff7a.tgz
-    version: 0.1.2-gb00ff7a
-  - apiVersion: v2
-    appVersion: 0.1.6
-    created: "2020-10-12T20:05:11.345700801Z"
-    dependencies:
-    - alias: jupyterhub
-      name: jupyterhub
-      repository: https://jupyterhub.github.io/helm-chart/
-      version: 0.9.1
-    description: pysequila is an SQL-based solution for large-scale genomic analysis
-    digest: 85e0d7f1fe5cefba88df1656c7e932d1d6f5363764e7e3d0743dd0699532a59c
-    home: https://pypi.org/project/pysequila/
-    icon: https://avatars2.githubusercontent.com/u/71327120?s=200&v=4
-    keywords:
-    - bioinformatics
-    - next generation sequencing
-    - Apache Spark
-    - SQL
-    maintainers:
-    - email: team@biodatageeks.org
-      name: biodatageeks
-      url: http://biodatageeks.org/
-    name: pysequila
-    type: application
-    urls:
-    - https://github.com/biodatageeks/charts-snapshots/releases/download/pysequila-0.1.1-g3f43300/pysequila-0.1.1-g3f43300.tgz
-    version: 0.1.1-g3f43300
-generated: "2020-10-12T20:05:11.106924419Z"
+    - https://github.com/biodatageeks/charts/releases/download/pysequila-0.1.1/pysequila-0.1.1.tgz
+    version: 0.1.1
+generated: "2020-10-12T20:17:07.896072895Z"
