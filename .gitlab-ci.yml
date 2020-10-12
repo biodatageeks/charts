@@ -14,13 +14,21 @@ variables:
   SEMVER_VERSION: 4.0.1
   CHART_RELEASER_VERSION: 1.0.0
   CHART_NAME: pysequila
+  PYSEQUILA_VERSION: 0.1.6
 
 ##chart releaser
   CR_OWNER: biodatageeks
-  CR_GIT_REPO: charts
-  CR_PACKAGE_PATH: ".deploy"
+  CR_BASE_PACKAGE_PATH: ".deploy"
   CR_GIT_BASE_URL: "https://api.github.com/"
   CR_GIT_UPLOAD_URL: "https://uploads.github.com/"
+
+.releasesVars: &releasesVars
+  CR_GIT_REPO: charts
+  CR_PACKAGE_PATH: "${CR_BASE_PACKAGE_PATH}/releases"
+
+.snapshotsVars: &snapshotsVars
+  CR_GIT_REPO: charts-snapshots
+  CR_PACKAGE_PATH: "${CR_BASE_PACKAGE_PATH}/snapshots"
 
 
 # --------------------------------- STAGE: version ---------------------------------------------------------------------
@@ -56,8 +64,7 @@ version-tag:
     - branches
 
 
-package:
-  stage: package
+.package: &package
   image:
     name: docker:$DOCKER_VERSION
   before_script:
@@ -73,27 +80,68 @@ package:
       && chmod g+rwx /config
   script:
     - envsubst < $CHART_NAME/Chart-template.yaml > $CHART_NAME/Chart.yaml
+    - helm dep update $CHART_NAME
     - helm lint $CHART_NAME
-    - helm package $CHART_NAME --destination .deploy
+    - helm package $CHART_NAME --destination $CR_PACKAGE_PATH
   artifacts:
     paths:
-      - /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/.deploy/
+      - /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$CR_PACKAGE_PATH/
   except: [ master ]
   tags: [ docker ]
 
-release:
-  stage: release
+
+.publish: &publish
   image:
     name: quay.io/helmpack/chart-releaser:v${CHART_RELEASER_VERSION}
   before_script:
     - source $VERSION_FILE
     - apk --no-cache add curl git bash
+    - git config --global user.email "team@biodatageeks.org"
+    - git config --global user.name "Biodatageek"
   script:
     - cr upload
+    - git pull origin gh-pages
     - git checkout gh-pages
-    - cr index -i ./index.yaml -p .deploy
-  artifacts:
-    paths:
-      - /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/.index.yaml
+    - cr index -i ./index.yaml -p $CR_PACKAGE_PATH --charts-repo https://github.com/${CR_OWNER}/${CR_GIT_REPO}/
+    - git add index.yaml
+    - git add --force $CR_PACKAGE_PATH
+    - git commit -m "Release $CHART_NAME-$VERSION"
+    - git push https://${CR_TOKEN}@github.com/${CR_OWNER}/${CR_GIT_REPO}.git
   except: [ master ]
   tags: [ docker ]
+
+
+packageSnapshot:
+  stage: package
+  variables:
+    <<: *snapshotsVars
+  <<: *package
+  except: [ master, tags ]
+
+packageRelease:
+  stage: package
+  variables:
+    <<: *releasesVars
+  <<: *package
+  only:
+    - tags
+  except:
+    - branches
+
+publishSnapshot:
+  stage: release
+  variables:
+    <<: *snapshotsVars
+  <<: *publish
+  except: [ master, tags ]
+
+publishRelease:
+  stage: release
+  variables:
+    <<: *releasesVars
+  <<: *publish
+  only:
+    - tags
+  except:
+    - branches
+  when: manual
