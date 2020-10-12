@@ -14,6 +14,7 @@ variables:
   SEMVER_VERSION: 4.0.1
   CHART_RELEASER_VERSION: 1.0.0
   CHART_NAME: pysequila
+  PYSEQUILA_VERSION: 0.1.6
 
 ##chart releaser
   CR_OWNER: biodatageeks
@@ -63,7 +64,7 @@ version-tag:
     - branches
 
 
-package: &package
+.package: &package
   image:
     name: docker:$DOCKER_VERSION
   before_script:

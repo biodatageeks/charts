@@ -20,6 +20,18 @@ version: $VERSION
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: 0.1.6
+appVersion: $PYSEQUILA_VERSION
 
 icon: https://avatars2.githubusercontent.com/u/71327120?s=200&v=4
+keywords:
+  - bioinformatics
+  - next generation sequencing
+  - Apache Spark
+  - SQL
+
+home: https://pypi.org/project/pysequila/
+
+maintainers:
+  - name: biodatageeks
+    email: team@biodatageeks.org
+    url: http://biodatageeks.org/
