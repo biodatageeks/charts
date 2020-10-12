@@ -106,7 +106,7 @@ version-tag:
     - git add index.yaml
     - git add --force $CR_PACKAGE_PATH
     - git commit -m "Release $CHART_NAME-$VERSION"
-    - git push https://${CR_TOKEN}@github.com/${CR_OWNER}/${CR_GIT_REPO}.git
+    - git push -f https://${CR_TOKEN}@github.com/${CR_OWNER}/${CR_GIT_REPO}.git
   except: [ master ]
   tags: [ docker ]
 
